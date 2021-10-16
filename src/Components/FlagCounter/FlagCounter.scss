@@ -1,0 +1,17 @@
+@import "../../Scss/fonts";
+
+#flagcounter-container {
+  width: 100px;
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 10px;
+  font-size: $font-medium;
+  font-family: $font-primary;
+  font-weight: $font-bold;
+}
+
+.icon-medium {
+  font-size: $font-medium;
+}
