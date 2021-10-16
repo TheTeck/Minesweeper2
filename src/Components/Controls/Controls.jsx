@@ -1,6 +1,7 @@
 import React from 'react';
 
 import FlagCounter from '../FlagCounter/FlagCounter';
+import GameSelect from '../GameSelect/GameSelect';
 import './Controls.scss';
 
 export default function Controls (props) {
@@ -8,6 +9,7 @@ export default function Controls (props) {
         <div id="controls-container">
             <div id="controls-cluster">
                 <FlagCounter count={"04"} />
+                <GameSelect level={props.level} updateLevel={props.updateLevel} />
             </div>
         </div>
     )
