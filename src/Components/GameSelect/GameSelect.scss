@@ -1,0 +1,13 @@
+@import "../../Scss/fonts";
+
+#gameselect-container {
+  width: 150px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon-medium {
+  font-size: $font-medium;
+}
