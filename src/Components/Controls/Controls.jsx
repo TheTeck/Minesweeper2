@@ -3,6 +3,7 @@ import React from 'react';
 import FlagCounter from '../FlagCounter/FlagCounter';
 import GameSelect from '../GameSelect/GameSelect';
 import NewGameButton from '../NewGameButton/NewGameButton';
+import Timer from '../Timer/Timer';
 import './Controls.scss';
 
 export default function Controls (props) {
@@ -12,6 +13,8 @@ export default function Controls (props) {
                 <FlagCounter count={"04"} />
                 <GameSelect level={props.level} updateLevel={props.updateLevel} />
                 <NewGameButton />
+                {/* False for now. should change when game starts */}
+                <Timer active={false} /> 
             </div>
         </div>
     )
