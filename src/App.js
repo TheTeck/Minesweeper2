@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import Controls from './Components/Controls/Controls';
+import GameBoard from './Components/GameBoard/GameBoard';
 import './App.scss';
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
   return (
     <div className="App">
       <Controls level={level} updateLevel={updateLevel} />
+      <GameBoard game={boardData[level]} />
     </div>
   );
 }
