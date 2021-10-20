@@ -34,7 +34,7 @@ class CellData {
 // props: game = {x, y, bombs}
 export default function GameBoard (props) {
 
-    const [board, setBoard] = useState(generateGameArray(props.game.x, props.game.y));
+    const [board, setBoard] = useState(generateGameArray(props.game.x, props.game.y, props.game.bombs));
 
     const cellSize = 30;
 
@@ -42,37 +42,35 @@ export default function GameBoard (props) {
         //do something here
     }
 
-    // Create 2D array filled with Cells
-    function generateGameArray (x, y) {
-        let gameboard = new Array(y);
+    // Create array filled with Cells
+    function generateGameArray (x, y, bombs) {
+        let gameboard = new Array(x * y);
 
         for (let j = 0; j < y; j++) {
-            gameboard[j] = new Array(x);
-
             for (let i = 0; i < x; i++) {
                 let newCell = new CellData(i, j);
-                gameboard[j][i] = newCell;
+                gameboard[j * x + i] = newCell;
             }
         }
 
         // Fill empty nested array with bombs
-        gameboard = populateBombs(gameboard, props.game.bombs);
+        gameboard = populateBombs(gameboard, x, y, bombs);
 
         // Fill cells around bombs with numbers
-        gameboard = populateNumbers(gameboard);
+        //gameboard = populateNumbers(gameboard);
 
         return gameboard;
     }
 
     // Randomly give cells bombs (if they don't have it already)
-    function populateBombs (gameboard, count) {
-        while (count) {
-            const randX = Math.floor(Math.random() * gameboard[0].length);
-            const randY = Math.floor(Math.random() * gameboard.length);
+    function populateBombs (gameboard, x, y, bombCount) {
+        while (bombCount) {
+            const randX = Math.floor(Math.random() * x);
+            const randY = Math.floor(Math.random() * y);
 
-            if (gameboard[randY][randX].value === 0) {
-                gameboard[randY][randX].value = 9
-                count--
+            if (gameboard[randY * x + randX].value === 0) {
+                gameboard[randY * x + randX].value = 9
+                bombCount--
             }
         }
 
@@ -116,24 +114,16 @@ export default function GameBoard (props) {
                     height: `${props.game.y * (cellSize + 2)}px`
                 }} 
             >
-            {
-                board.map((row, indexY) => {
-                    return (
-                        <div key={-indexY} className="cell-row">
-                            {
-                                row.map((col, indexX) => {
-                                    return <Cell 
-                                        key={indexY * row.length + indexX} 
-                                        cell={col} 
-                                        size={cellSize} 
-                                        handleCellClick={handleCellClick}    
-                                    />
-                                })
-                            }
-                        </div>
-                    )
-                })
-            }
+                {
+                    board.map((unit, index) => {
+                        return <Cell 
+                            key={index} 
+                            cell={unit} 
+                            size={cellSize} 
+                            handleCellClick={handleCellClick}    
+                        />
+                    })
+                }
             </div>
         </div>
     )
