@@ -13,7 +13,7 @@
 
 #gameboard-area {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
 }
 
 .cell-row {
