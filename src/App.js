@@ -7,7 +7,7 @@ import './App.scss';
 function App() {
 
   // level will have the values: 'easy', 'medium' or 'hard'
-  const [level, setLevel] = useState('easy')
+  const [level, setLevel] = useState('easy');
   
   // Object holding the options for board sizes and bomb count
   const boardData = {

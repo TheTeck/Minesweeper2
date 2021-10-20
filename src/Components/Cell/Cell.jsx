@@ -3,15 +3,24 @@ import React from 'react';
 import './Cell.scss';
 
 export default function Cell (props) {
+
+    function handleLeftClick () {
+        props.handleCellClick(props.cell.x, props.cell.y);
+    }
+
     return (
         <div 
-            id="cell-container"
+            className="cell-container"
             style={{
                 width: `${props.size}px`,
                 height: `${props.size}px`
             }}
         >
-            <div className="cell-data">{props.cell.value}</div>
+            {
+                !props.cell.exposed ? <div onClick={handleLeftClick} className="unexposed-cell" style={{ backgroundColor: 'maroon' }}></div>
+                : props.cell.value === 9 ? <div className="material-icons icon-tiny">wb_sunny</div>
+                :<div className={`cell${props.cell.value}`}> {props.cell.value}</div>
+            }
         </div>
     )
 }
