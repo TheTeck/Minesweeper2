@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 
+import Cell from '../Cell/Cell';
 import './GameBoard.scss';
 
 
-class Cell {
+class CellData {
     constructor (x, y) {
         this.x = x;
         this.y = y;
@@ -15,17 +16,17 @@ class Cell {
     flag() {
         if(this.flagged) {
             this.flagged = false;
-            Cell.flaggedCount--;
+            CellData.flaggedCount--;
         } else {
             this.flagged = true;
-            Cell.flaggedCount++;
+            CellData.flaggedCount++;
         }
     }
 
     expose() {
         if (!this.exposed) {
             this.exposed = true;
-            Cell.exposedCount++;
+            CellData.exposedCount++;
         }
     }
 }
@@ -35,7 +36,7 @@ export default function GameBoard (props) {
 
     const [board, setBoard] = useState(generateGameArray(props.game.x, props.game.y));
 
-    const cellWidth = 25;
+    const cellSize = 30;
 
     
 
@@ -46,7 +47,7 @@ export default function GameBoard (props) {
             gameboard[j] = new Array(x);
 
             for (let i = 0; i < x; i++) {
-                let newCell = new Cell(i, j);
+                let newCell = new CellData(i, j);
                 gameboard[j][i] = newCell;
             }
         }
@@ -110,11 +111,23 @@ export default function GameBoard (props) {
             <div 
                 id="gameboard-area"
                 style={{
-                    width: `${props.game.x * cellWidth}px`,
-                    height: `${props.game.y * cellWidth}px`
+                    width: `${props.game.x * (cellSize + 2)}px`,
+                    height: `${props.game.y * (cellSize + 2)}px`
                 }} 
             >
-             {/* Map the array to the screen */}
+            {
+                board.map((row, indexY) => {
+                    return (
+                        <div>
+                            {
+                                row.map((col, indexX) => {
+                                    return <Cell key={indexX} cell={col} size={cellSize} />
+                                })
+                            }
+                        </div>
+                    )
+                })
+            }
             </div>
         </div>
     )
