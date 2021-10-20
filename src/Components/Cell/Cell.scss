@@ -1,6 +1,57 @@
-#cell-container {
+@import "../../Scss/colors";
+@import "../../Scss/fonts";
+
+.cell-container {
   display: flex;
   justify-content: center;
   align-items: center;
   border: 1px solid black;
+  font-family: $font-primary;
+  font-size: $font-tiny;
+  font-weight: $font-bold;
+
+  .unexposed-cell {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    &:hover {
+      background-color: forestgreen;
+    }
+  }
+}
+
+.icon-tiny {
+  font-size: $font-tiny;
+}
+
+.cell1 {
+  color: $cell1;
+}
+
+.cell2 {
+  color: $cell2;
+}
+
+.cell3 {
+  color: $cell3;
+}
+
+.cell4 {
+  color: $cell4;
+}
+
+.cell5 {
+  color: $cell5;
+}
+
+.cell6 {
+  color: $cell6;
+}
+
+.cell7 {
+  color: $cell7;
+}
+
+.cell8 {
+  color: $cell8;
 }

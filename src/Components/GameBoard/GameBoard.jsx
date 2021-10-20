@@ -38,8 +38,11 @@ export default function GameBoard (props) {
 
     const cellSize = 30;
 
-    
+    function handleCellClick(x, y) {
+        //do something here
+    }
 
+    // Create 2D array filled with Cells
     function generateGameArray (x, y) {
         let gameboard = new Array(y);
 
@@ -104,8 +107,6 @@ export default function GameBoard (props) {
         return gameboard;
     }
 
-    console.log(board)
-
     return (
         <div id="gameboard-container">
             <div 
@@ -118,10 +119,15 @@ export default function GameBoard (props) {
             {
                 board.map((row, indexY) => {
                     return (
-                        <div>
+                        <div key={-indexY} className="cell-row">
                             {
                                 row.map((col, indexX) => {
-                                    return <Cell key={indexX} cell={col} size={cellSize} />
+                                    return <Cell 
+                                        key={indexY * row.length + indexX} 
+                                        cell={col} 
+                                        size={cellSize} 
+                                        handleCellClick={handleCellClick}    
+                                    />
                                 })
                             }
                         </div>
