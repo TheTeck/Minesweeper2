@@ -39,7 +39,11 @@ export default function GameBoard (props) {
     const cellSize = 30;
 
     function handleCellClick(x, y) {
-        //do something here
+        let index = x + y * props.game.x;
+        let clickedCell = board[index];
+
+        clickedCell.expose();
+        setBoard([...board.slice(0, index), clickedCell, ...board.slice(index + 1)]);
     }
 
     // Create array filled with Cells
