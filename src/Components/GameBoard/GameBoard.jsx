@@ -57,7 +57,7 @@ export default function GameBoard (props) {
         gameboard = populateBombs(gameboard, x, y, bombs);
 
         // Fill cells around bombs with numbers
-        //gameboard = populateNumbers(gameboard);
+        gameboard = populateNumbers(gameboard, x, y);
 
         return gameboard;
     }
@@ -79,26 +79,27 @@ export default function GameBoard (props) {
 
     // Populate the cells with numerical values indicating how many bombs are next to it (9=bomb)
     // Each surrounding space also gets out-of-bounds checking 
-    function populateNumbers(gameboard) {
-        for (let i = 0; i < gameboard.length; i++) {
-            for (let j = 0; j < gameboard[0].length; j++) {
-                if (gameboard[i][j].value !== 9) {
-                    if (j > 0 && i > 0 && gameboard[i-1][j-1].value === 9)
-                        gameboard[i][j].value++
-                    if(i > 0 && gameboard[i-1][j].value === 9)
-                        gameboard[i][j].value++
-                    if (i > 0 && j < gameboard[0].length-1 && gameboard[i-1][j+1].value === 9)
-                        gameboard[i][j].value++
-                    if(j > 0 && gameboard[i][j-1].value === 9)
-                        gameboard[i][j].value++
-                    if(j < gameboard[0].length-1 && gameboard[i][j+1].value === 9)
-                        gameboard[i][j].value++
-                    if (j > 0 && i < gameboard.length-1 && gameboard[i+1][j-1].value === 9)
-                        gameboard[i][j].value++
-                    if(i < gameboard.length-1 && gameboard[i+1][j].value === 9)
-                        gameboard[i][j].value++
-                    if (j < gameboard[0].length-1 && i < gameboard.length-1 && gameboard[i+1][j+1].value === 9)
-                        gameboard[i][j].value++
+    function populateNumbers(gameboard, x, y) {
+        console.log("in popoulateNumbers")
+        for (let i = 0; i < x; i++) {
+            for (let j = 0; j < y; j++) {
+                if (gameboard[j * x + i].value !== 9) {
+                    if (j > 0 && i > 0 && gameboard[(j-1) * x + (i-1)].value === 9)
+                        gameboard[j * x + i].value++
+                    if(i > 0 && gameboard[j * x + (i-1)].value === 9)
+                        gameboard[j * x + i].value++
+                    if (i > 0 && j < y-1 && gameboard[(j+1) * x + (i-1)].value === 9)
+                        gameboard[j * x + i].value++
+                    if(j > 0 && gameboard[(j-1) * x + i].value === 9)
+                        gameboard[j * x + i].value++
+                    if(j < y-1 && gameboard[(j+1) * x + i].value === 9)
+                        gameboard[j * x + i].value++
+                    if (j > 0 && i < x-1 && gameboard[(j-1) * x + (i+1)].value === 9)
+                        gameboard[j * x + i].value++
+                    if(i < x-1 && gameboard[j * x + (i+1)].value === 9)
+                        gameboard[j * x + i].value++
+                    if (j < y-1 && i < x-1 && gameboard[(j+1) * x + (i+1)].value === 9)
+                        gameboard[j * x + i].value++
                 }
             }
         }
