@@ -5,6 +5,9 @@ import './GameBoard.scss';
 
 
 class CellData {
+    static flaggedCount = 0;
+    static exposedCount = 0;
+
     constructor (x, y) {
         this.x = x;
         this.y = y;
@@ -31,19 +34,67 @@ class CellData {
     }
 }
 
-// props: game = {x, y, bombs}
-export default function GameBoard (props) {
+export default function GameBoard ({ game }) {
 
-    const [board, setBoard] = useState(generateGameArray(props.game.x, props.game.y, props.game.bombs));
-
+    const [board, setBoard] = useState(generateGameArray(game.x, game.y, game.bombs));
+    const [gameOver, setGameOver] = useState(false);
+    const [gameWon, setGameWon] = useState(false);
     const cellSize = 30;
 
     function handleCellClick(x, y) {
-        let index = x + y * props.game.x;
+        let index = x + y * game.x;
         let clickedCell = board[index];
 
-        clickedCell.expose();
-        setBoard([...board.slice(0, index), clickedCell, ...board.slice(index + 1)]);
+        // Clicked on a bomb or non-bomb cell
+        if (board[x + y * game.x].value === 9) {
+            endGame();
+        } else {
+            exposeMore(x, y);
+            setBoard([...board])
+        }
+
+        // Check if player has won
+        if (game.x * game.y - game.bombs === CellData.exposedCount) {
+            endGame();
+            setGameWon(true);
+        }
+    }
+
+    // Recursively expose all surrounding cells
+    function exposeMore (x, y) {
+        let cell = board[x + y * game.x];
+
+        if (!cell.exposed)
+            cell.expose();
+
+        if (cell.value > 0)
+            return
+
+        if (x > 0 && y > 0 && !board[(x-1) + (y-1) * game.x].exposed)
+            exposeMore(x-1, y-1);
+        if (y > 0 && !board[x + (y-1) * game.x].exposed)
+            exposeMore(x, y-1);
+        if (x < game.x-1 && y > 0 && !board[(x+1) + (y-1) * game.x].exposed)
+            exposeMore(x+1, y-1);
+        if (x < game.x-1 && !board[(x+1) + y * game.x].exposed)
+            exposeMore(x+1, y);
+        if (x < game.x-1 && y < game.y-1 && !board[(x+1) + (y+1) * game.x].exposed)
+            exposeMore(x+1, y+1);
+        if (y < game.y-1 && !board[x + (y+1) * game.x].exposed)
+            exposeMore(x, y+1);
+        if (x > 0 && y < game.y-1 && !board[(x-1) + (y+1) * game.x].exposed)
+            exposeMore(x-1, y+1);
+        if (x > 0 && !board[(x-1) + y * game.x].exposed)
+            exposeMore(x-1, y);
+    }
+
+    // Helper function to indicate end of game an expose the board
+    function endGame () {
+        setGameOver(true)
+        board.forEach(cell => {
+            cell.expose();
+        });
+        setBoard(board)
     }
 
     // Create array filled with Cells
@@ -115,8 +166,8 @@ export default function GameBoard (props) {
             <div 
                 id="gameboard-area"
                 style={{
-                    width: `${props.game.x * (cellSize + 2)}px`,
-                    height: `${props.game.y * (cellSize + 2)}px`
+                    width: `${game.x * (cellSize + 2)}px`,
+                    height: `${game.y * (cellSize + 2)}px`
                 }} 
             >
                 {
@@ -128,7 +179,11 @@ export default function GameBoard (props) {
                             handleCellClick={handleCellClick}    
                         />
                     })
+                    
                 }
+                <h1 className="result-text">{
+                    !gameOver ? '' : gameWon ? 'You Won!' : 'You Lost!'
+                }</h1>
             </div>
         </div>
     )
