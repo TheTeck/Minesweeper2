@@ -34,7 +34,7 @@ class CellData {
     }
 }
 
-export default function GameBoard ({ game }) {
+export default function GameBoard ({ game, updateFlags }) {
 
     const [board, setBoard] = useState(generateGameArray(game.x, game.y, game.bombs));
     const [gameOver, setGameOver] = useState(false);
@@ -45,12 +45,16 @@ export default function GameBoard ({ game }) {
         let index = x + y * game.x;
         let clickedCell = board[index];
 
+        // Can't left click on flagged cells
+        if (clickedCell.flagged)
+            return;
+
         // Clicked on a bomb or non-bomb cell
         if (board[x + y * game.x].value === 9) {
             endGame();
         } else {
             exposeMore(x, y);
-            setBoard([...board])
+            setBoard([...board]);
         }
 
         // Check if player has won
@@ -95,6 +99,14 @@ export default function GameBoard ({ game }) {
             cell.expose();
         });
         setBoard(board)
+    }
+
+    // Right click on cell will turn flag on and off
+    function toggleFlag (x, y) {
+        if (!(!board[x + y * game.x].flagged && CellData.flaggedCount >= game.bombs)) {
+            board[x + y * game.x].flag();
+            updateFlags(game.bombs - CellData.flaggedCount)
+        }
     }
 
     // Create array filled with Cells
@@ -176,7 +188,8 @@ export default function GameBoard ({ game }) {
                             key={index} 
                             cell={unit} 
                             size={cellSize} 
-                            handleCellClick={handleCellClick}    
+                            handleCellClick={handleCellClick}
+                            toggleFlag={toggleFlag}    
                         />
                     })
                     
