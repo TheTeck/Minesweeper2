@@ -19,7 +19,7 @@ export default function Cell (props) {
             {
                 !props.cell.exposed ? <div onClick={handleLeftClick} className="unexposed-cell" style={{ backgroundColor: 'maroon' }}></div>
                 : props.cell.value === 9 ? <div className="material-icons icon-tiny">wb_sunny</div>
-                :<div className={`cell${props.cell.value}`}> {props.cell.value}</div>
+                :<div className={`cell${props.cell.value}`}> {props.cell.value ? props.cell.value : ''}</div>
             }
         </div>
     )
