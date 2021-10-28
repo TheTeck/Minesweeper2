@@ -13,8 +13,7 @@ export default function Controls (props) {
                 <FlagCounter count={props.flags} />
                 <GameSelect level={props.level} updateLevel={props.updateLevel} />
                 <NewGameButton restartGame={props.restartGame} />
-                {/* False for now. should change when game starts */}
-                <Timer active={false} /> 
+                <Timer active={props.active} restart={props.restart} /> 
             </div>
         </div>
     )

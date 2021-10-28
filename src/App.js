@@ -27,6 +27,7 @@ function App() {
 
   // level will have the values: 'easy', 'medium' or 'hard'
   const [level, setLevel] = useState('easy');
+  const [active, setActive] = useState(false);
   const [flags, setFlags] = useState(boardData[level].bombs);
   const [restart, setRestart] = useState(0);
 
@@ -43,14 +44,14 @@ function App() {
     setRestart(prev => prev + 1);
   }
 
-  useEffect(() => {
-    console.log(level)
-  }, [level])
+  function isActive (newState) {
+    setActive(newState);
+  }
 
   return (
     <div className="App">
-      <Controls level={level} updateLevel={updateLevel} flags={flags} restartGame={restartGame} />
-      <GameBoard game={boardData[level]} updateFlags={updateFlags} restart={restart} />
+      <Controls level={level} updateLevel={updateLevel} flags={flags} restartGame={restartGame} active={active} restart={restart} />
+      <GameBoard game={boardData[level]} updateFlags={updateFlags} restart={restart} isActive={isActive} />
     </div>
   );
 }

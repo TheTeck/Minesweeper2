@@ -34,7 +34,7 @@ class CellData {
     }
 }
 
-export default function GameBoard ({ game, updateFlags, restart }) {
+export default function GameBoard ({ game, updateFlags, restart, isActive }) {
 
     const [board, setBoard] = useState(generateGameArray(game.x, game.y, game.bombs));
     const [gameOver, setGameOver] = useState(false);
@@ -51,11 +51,16 @@ export default function GameBoard ({ game, updateFlags, restart }) {
         setGameOver(false);
         setGameWon(false);
         setRestartPoint(restart);
+        isActive(false);
     }
 
     function handleCellClick(x, y) {
         let index = x + y * game.x;
         let clickedCell = board[index];
+
+        // If first click, then start clock
+        if (CellData.exposedCount === 0)
+            isActive(true);
 
         // Can't left click on flagged cells
         if (clickedCell.flagged)
@@ -110,7 +115,8 @@ export default function GameBoard ({ game, updateFlags, restart }) {
         board.forEach(cell => {
             cell.expose();
         });
-        setBoard(board)
+        setBoard(board);
+        isActive(false);
     }
 
     // Right click on cell will turn flag on and off
@@ -159,7 +165,6 @@ export default function GameBoard ({ game, updateFlags, restart }) {
     // Populate the cells with numerical values indicating how many bombs are next to it (9=bomb)
     // Each surrounding space also gets out-of-bounds checking 
     function populateNumbers(gameboard, x, y) {
-        console.log("in popoulateNumbers")
         for (let i = 0; i < x; i++) {
             for (let j = 0; j < y; j++) {
                 if (gameboard[j * x + i].value !== 9) {

@@ -2,10 +2,15 @@ import React, { useState, useEffect } from 'react';
 
 import './Timer.scss';
 
-export default function Timer (props) {
+export default function Timer ({ active, restart }) {
 
     const [time, setTime] = useState(0);
-    const [active, setActive] = useState(props.active);
+    const [restartPoint, setRestartPoint] = useState(0);
+
+    if (restart > restartPoint) {
+        setRestartPoint(restart);
+        setTime(0);
+    }
 
     function padNum (num) {
         return num < 10 ? '0' + num : num
