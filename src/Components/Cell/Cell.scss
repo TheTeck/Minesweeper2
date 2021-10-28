@@ -19,13 +19,17 @@
     justify-content: center;
     align-items: center;
     background-color: $primary-color;
-
     transition: background-color 1s ease-out;
 
     &:hover {
       background-color: $secondary-color;
     }
   }
+}
+
+.exploded {
+  color: rgb(157, 0, 0);
+  text-shadow: 0 0 20px red;
 }
 
 .icon-tiny {
