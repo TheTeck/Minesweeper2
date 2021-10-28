@@ -1,10 +1,20 @@
+@import "../../Scss/colors";
+
 #newgamebutton-container {
   width: 50px;
   height: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 3px solid black;
+  border: 3px solid $primary-color;
   border-radius: 5px;
   cursor: pointer;
+  color: $primary-color;
+  text-shadow: 0 0 5px $primary-color;
+  background-color: $main-background;
+  box-shadow: 0 0 10px $primary-color;
+
+  &:hover {
+    box-shadow: 0 0 20px $primary-color;
+  }
 }

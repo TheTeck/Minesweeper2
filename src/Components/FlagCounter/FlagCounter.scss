@@ -1,4 +1,5 @@
 @import "../../Scss/fonts";
+@import "../../Scss/colors";
 
 #flagcounter-container {
   height: 100%;
@@ -9,8 +10,13 @@
   font-size: $font-medium;
   font-family: $font-primary;
   font-weight: $font-bold;
+  color: $primary-color;
+  background-color: $main-background;
+  text-shadow: 0 0 10px $primary-color;
 }
 
 .icon-medium {
   font-size: $font-medium;
+  color: $secondary-color;
+  text-shadow: 0 0 10px $secondary-color;
 }

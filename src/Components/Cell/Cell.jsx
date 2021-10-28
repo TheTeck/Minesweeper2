@@ -22,8 +22,8 @@ export default function Cell (props) {
             }}
         >
             {
-                !props.cell.exposed ? (props.cell.flagged ? <div onClick={handleLeftClick} onContextMenu={handleRightClick} className="unexposed-cell material-icons icon-tiny" style={{ backgroundColor: 'maroon' }}>flag</div>
-                : <div onClick={handleLeftClick} onContextMenu={handleRightClick} className="unexposed-cell" style={{ backgroundColor: 'maroon' }}></div>)
+                !props.cell.exposed ? (props.cell.flagged ? <div onClick={handleLeftClick} onContextMenu={handleRightClick} className="unexposed-cell material-icons icon-tiny">flag</div>
+                : <div onClick={handleLeftClick} onContextMenu={handleRightClick} className="unexposed-cell"></div>)
                 : props.cell.value === 9 ? <div className="material-icons icon-tiny">wb_sunny</div>
                 : <div className={`cell${props.cell.value}`}> {props.cell.value ? props.cell.value : ''}</div>
             }

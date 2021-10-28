@@ -5,10 +5,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid black;
+  border: 1px solid $secondary-color;
   font-family: $font-primary;
   font-size: $font-tiny;
   font-weight: $font-bold;
+  background-color: white;
 
   .unexposed-cell {
     width: 100%;
@@ -17,6 +18,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: $primary-color;
+
+    transition: background-color 1s ease-out;
+
+    &:hover {
+      background-color: $secondary-color;
+    }
   }
 }
 
