@@ -1,9 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
 
+@font-face {
+  font-family: "alien";
+  src: url("../fonts/alien.ttf");
+}
+
 $font-medium: 2.5rem;
 $font-small: 2rem;
 $font-tiny: 1.5rem;
 
 $font-primary: "Lato", sans-serif;
+$font-secondary: "alien";
 
 $font-bold: 700;
