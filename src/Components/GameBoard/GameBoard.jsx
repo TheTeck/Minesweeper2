@@ -34,12 +34,24 @@ class CellData {
     }
 }
 
-export default function GameBoard ({ game, updateFlags }) {
+export default function GameBoard ({ game, updateFlags, restart }) {
 
     const [board, setBoard] = useState(generateGameArray(game.x, game.y, game.bombs));
     const [gameOver, setGameOver] = useState(false);
     const [gameWon, setGameWon] = useState(false);
+    const [restartPoint, setRestartPoint] = useState(0);
     const cellSize = 30;
+
+    // Restart button was clicked in controls
+    if (restart > restartPoint) {
+        updateFlags(game.bombs);
+        CellData.flaggedCount = 0;
+        CellData.exposedCount = 0;
+        setBoard(generateGameArray(game.x, game.y, game.bombs));
+        setGameOver(false);
+        setGameWon(false);
+        setRestartPoint(restart);
+    }
 
     function handleCellClick(x, y) {
         let index = x + y * game.x;
@@ -179,7 +191,9 @@ export default function GameBoard ({ game, updateFlags }) {
                 id="gameboard-area"
                 style={{
                     width: `${game.x * (cellSize + 2)}px`,
-                    height: `${game.y * (cellSize + 2)}px`
+                    height: `${game.y * (cellSize + 2)}px`,
+                    minWidth: `${game.x * (cellSize + 2)}px`,
+                    minHeight: `${game.y * (cellSize + 2)}px`
                 }} 
             >
                 {
