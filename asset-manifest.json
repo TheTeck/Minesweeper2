@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/Minesweeper2/static/css/main.fd8d0681.chunk.css",
+    "main.js": "/Minesweeper2/static/js/main.646b941e.chunk.js",
+    "main.js.map": "/Minesweeper2/static/js/main.646b941e.chunk.js.map",
+    "runtime-main.js": "/Minesweeper2/static/js/runtime-main.6f1225b2.js",
+    "runtime-main.js.map": "/Minesweeper2/static/js/runtime-main.6f1225b2.js.map",
+    "static/js/2.1f57b144.chunk.js": "/Minesweeper2/static/js/2.1f57b144.chunk.js",
+    "static/js/2.1f57b144.chunk.js.map": "/Minesweeper2/static/js/2.1f57b144.chunk.js.map",
+    "static/js/3.c575a376.chunk.js": "/Minesweeper2/static/js/3.c575a376.chunk.js",
+    "static/js/3.c575a376.chunk.js.map": "/Minesweeper2/static/js/3.c575a376.chunk.js.map",
+    "index.html": "/Minesweeper2/index.html",
+    "static/css/main.fd8d0681.chunk.css.map": "/Minesweeper2/static/css/main.fd8d0681.chunk.css.map",
+    "static/js/2.1f57b144.chunk.js.LICENSE.txt": "/Minesweeper2/static/js/2.1f57b144.chunk.js.LICENSE.txt",
+    "static/media/GameBoard.scss": "/Minesweeper2/static/media/alien.99e2ab9c.ttf"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.6f1225b2.js",
+    "static/js/2.1f57b144.chunk.js",
+    "static/css/main.fd8d0681.chunk.css",
+    "static/js/main.646b941e.chunk.js"
+  ]
+}
