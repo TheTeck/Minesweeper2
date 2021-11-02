@@ -14,6 +14,7 @@ class CellData {
         this.value = 0;
         this.exposed = false;
         this.flagged = false;
+        this.detonated = false;
     }
 
     flag() {
@@ -24,6 +25,10 @@ class CellData {
             this.flagged = true;
             CellData.flaggedCount++;
         }
+    }
+
+    detonate() {
+        this.detonated = true;
     }
 
     expose() {
@@ -68,6 +73,7 @@ export default function GameBoard ({ game, updateFlags, restart, isActive }) {
 
         // Clicked on a bomb or non-bomb cell
         if (board[x + y * game.x].value === 9) {
+            board[x + y * game.x].detonate();
             endGame();
         } else {
             exposeMore(x, y);
