@@ -1,70 +1,125 @@
-# Getting Started with Create React App
+# Minesweeper
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Developed with **React** and **Sass** by John Teckemeyer
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## Table Contents
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- [Overview](#overview)
+- [Getting Started](#getting-started)
+- [How To Play](#how-to-play)
+  - [The Menu](#the-menu)
+  - [Select Skill Level](#select-skill-level)
+  - [Restart Game](#restart-game)
+  - [Timer](#timer)
+  - [Flag Counter](#flag-counter)
+  - [Mines](#mines)
+  - [Proximity Indicators](#proximity-indicators)
+  - [Flags](#flags)
+- [Code](#code)
+  - [Creating The Gameboard](#creating-the-gameboard)
+  - [Exposing The Cells](#exposing-the-cells)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+---
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Overview
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+_Minesweeper_ is a single-player game in which the objective is to clear a rectangular grid of cells by avoiding those with mines and revealing all empty cells. Any empty cell can show a number indicating the quantity of mines surrounding it. It is with these numbers that the player can use logic to deduce the locations of the mines. The game ends when either the player reveals a mine or has cleared all empty cells.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+![Minesweeper](./public/images/Minesweeper.png)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Getting Started
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Play
+[Minesweeper here](https://TheTeck.github.io/Minesweeper2/)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+##### No setup necessary, just start clicking on the board!
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+---
 
-## Learn More
+---
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## How To Play
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
 
-### Code Splitting
+### _The Menu_:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+![Menu](./public/images/Menu.png)  
+The game menu is located at the top of the game board. In it, the player game see how many flags they have left to play and how much time (in seconds) has passed in the game. There are also controls for setting the difficulty of the game as well as restarting the game.
 
-### Analyzing the Bundle Size
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### _Select Skill Level_:
 
-### Making a Progressive Web App
+![Skill](./public/images/Skill.png)  
+You may change the skill level of the board by selecting either "Easy", "Medium" or "Hard" from the drop-down list. Increasing the difficulty increases the size of the board as well as the ratio of mines to empty spaces. "Easy" skill level has a 10x10 board with 10 mines, "Medium" skill level has a 16x16 board with 40 mines, and "Hard" skill level has a 16x30 board with 99 mines.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+---
 
-### Advanced Configuration
+### _Restart Game_:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+![Restart](./public/images/Restart.png)  
+You may restart the game at any time by simply pressing the restart button. Both the flag count and timer reset when game is restarted.
 
-### Deployment
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### _Timer_:
 
-### `npm run build` fails to minify
+![Timer](./public/images/Timer.png)  
+Located to the far-right of the menu is the game timer. It indicates the number of seconds that have passed since the first click on the board. The timer stops when the player either wins or loses.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
+
+### _Flag Counter_:
+
+![Flags](./public/images/Flagcount.png)  
+Located to the far-left of the menu is the flag counter. It indicated how many flags remain available for the player to use in the game.
+
+---
+
+### _Mines_:
+
+![Mines](./public/images/Bomb.png) ![Detonate](./public/images/Detonate.png)  
+Randomly scattered across the board are the mines. If you reveal one by left-clicking on it, it will detonate and end the game as a loss.
+
+---
+
+### _Proximity Indicators_:
+
+![Numbers](./public/images/Numbers.png)  
+As the cells become revealed, some will have numeric values indicating the quantity of mines that are in adjacent proximity of it. These values help deduce the locations of mines.
+
+---
+
+### _Flags_:
+
+![Flagging](./public/images/Flagging.png)  
+The player starts with a number of flags equal to the number of mines hidden on the board. The player may choose to use the flags to indicate the location they believe a mine to be. When a flag is place, that cell cannot be revealed. The player can remove any placed flag and reuse it on another cell. Flags are placed and removed with the right mouse button.
+
+---
+
+---
+
+## Code
+
+---
+
+### _Creating The Gameboard_:
+
+![Wireframe1](./public/images/Creategame.png)
+
+### _Exposing The Cells_:
+
+![Wireframe2](./public/images/Exposecells.png)
